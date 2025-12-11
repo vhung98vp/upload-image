@@ -47,7 +47,7 @@ def process_image(user_id: str, image_b64: str) -> str:
         img_bytes = decode_base64_image(image_b64)
         verify_image(img_bytes)
         saved_path = save_file(user_id, img_bytes)
-        save_data((user_id, saved_path))
+        save_data(user_id, saved_path)
     except HTTPException as he:
         timestamp = datetime.now().strftime("%Y%m%dT%H%M%S")
         with open(ERROR_FILE, "a") as f:

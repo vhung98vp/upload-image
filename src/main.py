@@ -18,7 +18,7 @@ def health_check():
     }
 
 
-@app.post("/upload")
+@app.post("/api/upload")
 def upload(req: ImageRequest):
     file_path = process_image(req.SoDinhDanh, req.HinhAnh)
     return {

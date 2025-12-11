@@ -44,19 +44,18 @@ def ensure_table(table_name=TABLE["name"]):
     conn.close()
 
 
-def save_data(record):
-    if not record:
+def save_data(user_id, saved_path):
+    if not user_id or not saved_path:
         return
     conn = get_connection()
     cur = conn.cursor()
 
     query = f"""
         INSERT INTO {TABLE["name"]} ({", ".join(TABLE["fields"].keys())})
-        VALUES %s
+        VALUES (%s, %s)
     """
-    # values = [(uid, path) for uid, path in records]
-    # execute_values(cur, query, record)
-    cur.execute(query, record)
+
+    cur.execute(query, (user_id, saved_path))
     conn.commit()
     cur.close()
     conn.close()
