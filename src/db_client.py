@@ -32,10 +32,9 @@ def ensure_table(table_name=TABLE["name"]):
     conn = get_connection()
     cur = conn.cursor()
 
-    fields = TABLE["fields"]
-    fields["id"] = "SERIAL PRIMARY KEY"
-    fields["created_at"] = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP"
-    columns = [f"{col} {col_type}" for col, col_type in fields.items()]
+    columns = [f"{col} {col_type}" for col, col_type in TABLE["fields"].items()]
+    columns.append("id SERIAL PRIMARY KEY")
+    columns.append("created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     query = f"CREATE TABLE IF NOT EXISTS {table_name} ({', '.join(columns)})"
     cur.execute(query)
 
