@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-from .utils import process_image
+from utils import process_image
 
 
 class ImageRequest(BaseModel):

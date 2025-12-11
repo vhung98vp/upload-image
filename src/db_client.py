@@ -1,7 +1,7 @@
 import psycopg2
 from psycopg2 import sql
 # from psycopg2.extras import execute_values
-from .config import DB, TABLE
+from config import DB, TABLE
 
 
 def get_connection(db_name=DB["name"]):

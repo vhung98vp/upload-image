@@ -3,8 +3,8 @@ from datetime import datetime
 from fastapi import HTTPException
 from PIL import Image
 from io import BytesIO
-from .config import get_logger, IMAGE_DIR, ERROR_FILE
-from .db_client import save_data
+from config import get_logger, IMAGE_DIR, ERROR_FILE
+from db_client import save_data
 
 logger = get_logger(__name__)
 
