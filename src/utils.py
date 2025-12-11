@@ -1,4 +1,5 @@
 import base64
+import os
 from datetime import datetime
 from fastapi import HTTPException
 from PIL import Image
@@ -27,6 +28,7 @@ def verify_image(img_bytes: bytes):
 def save_file(user_id: str, img_bytes: bytes) -> str:
     timestamp = datetime.now().strftime("%Y%m%dT%H%M%S")
     date_str = timestamp[:8]
+    os.makedirs(f"{IMAGE_DIR}/{date_str}", exist_ok=True)
     save_path = f"{IMAGE_DIR}/{date_str}/{user_id}_{timestamp}.png"
     try:
         with open(save_path, "wb") as f:
