@@ -34,7 +34,7 @@ def save_file(user_id: str, img_bytes: bytes) -> str:
         with open(save_path, "wb") as f:
             f.write(img_bytes)
     except Exception as e:
-        logger.error(f"Failed to save file for user_id={user_id}: {e}")
+        logger.error(f"Failed to save file for key={user_id}: {e}")
         raise HTTPException(status_code=500, detail="File save failed")
 
     logger.info(f"Saved file: {save_path}")
@@ -42,7 +42,7 @@ def save_file(user_id: str, img_bytes: bytes) -> str:
 
 
 def process_image(user_id: str, image_b64: str) -> str:
-    logger.info(f"Processing upload for user_id={user_id}")
+    logger.info(f"Processing upload for key={user_id}")
     try:
         img_bytes = decode_base64_image(image_b64)
         verify_image(img_bytes)
@@ -54,5 +54,5 @@ def process_image(user_id: str, image_b64: str) -> str:
             f.write(f"{timestamp}, {user_id}, {image_b64}\n")
         raise he
 
-    logger.info(f"Completed processing for user_id={user_id}")
+    logger.info(f"Completed processing for key={user_id}")
     return saved_path
