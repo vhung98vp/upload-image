@@ -1,5 +1,5 @@
 import os
-import sys
+from datetime import datetime 
 import logging
 from dotenv import load_dotenv
 
@@ -13,6 +13,7 @@ ERROR_DIR = os.getenv("ERROR_DIR", "/errors")
 os.makedirs(IMAGE_DIR, exist_ok=True)
 os.makedirs(LOG_DIR, exist_ok=True)
 
+timestamp = datetime.now().strftime("%Y%m%dT%H%M%S")
 
 def get_logger(name):
     logger = logging.getLogger(name)
@@ -27,7 +28,7 @@ def get_logger(name):
     console_handler.setFormatter(formatter)
     logger.addHandler(console_handler)
 
-    file_handler = logging.FileHandler(f"{LOG_DIR}/service.log")
+    file_handler = logging.FileHandler(f"{LOG_DIR}/{timestamp}.log")
     file_handler.setLevel(logging.INFO)
     file_handler.setFormatter(formatter)
     logger.addHandler(file_handler)
