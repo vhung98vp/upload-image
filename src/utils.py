@@ -4,7 +4,7 @@ from datetime import datetime
 from fastapi import HTTPException
 from PIL import Image
 from io import BytesIO
-from config import get_logger, IMAGE_DIR, ERROR_FILE
+from config import get_logger, IMAGE_DIR, ERROR_DIR
 from db_client import save_data
 
 logger = get_logger(__name__)
@@ -50,8 +50,8 @@ def process_image(user_id: str, image_b64: str) -> str:
         save_data(user_id, saved_path)
     except HTTPException as he:
         timestamp = datetime.now().strftime("%Y%m%dT%H%M%S")
-        with open(ERROR_FILE, "a") as f:
-            f.write(f"{timestamp}, {user_id}, {image_b64}\n")
+        with open(f"{ERROR_DIR}/{user_id}_{timestamp}.txt", "a") as f:
+            f.write(image_b64)
         raise he
 
     logger.info(f"Completed processing for key={user_id}")

@@ -8,7 +8,7 @@ load_dotenv()
 
 IMAGE_DIR = os.getenv("IMAGE_DIR", "/images")
 LOG_DIR = os.getenv("LOG_DIR", "/logs")
-ERROR_FILE = os.getenv("ERROR_FILE", "/logs/error.txt")
+ERROR_DIR = os.getenv("ERROR_DIR", "/errors")
 
 os.makedirs(IMAGE_DIR, exist_ok=True)
 os.makedirs(LOG_DIR, exist_ok=True)
